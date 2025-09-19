@@ -201,7 +201,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                               children: [
                                 Expanded(
                                   child: RadioListTile<String>(
-                                    title: const Text('11th'),
+                                    title: const Text('11th - Punjab Board'),
+                                    subtitle: const Text(
+                                      'Environmental Education',
+                                    ),
                                     value: '11th',
                                     groupValue: _selectedClass,
                                     onChanged: (value) {
@@ -214,7 +217,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                 ),
                                 Expanded(
                                   child: RadioListTile<String>(
-                                    title: const Text('12th'),
+                                    title: const Text('12th - Punjab Board'),
+                                    subtitle: const Text(
+                                      'Environmental Education',
+                                    ),
                                     value: '12th',
                                     groupValue: _selectedClass,
                                     onChanged: (value) {

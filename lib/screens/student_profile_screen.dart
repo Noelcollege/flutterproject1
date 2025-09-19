@@ -24,6 +24,9 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
   final TextEditingController _schoolController = TextEditingController(
     text: 'Delhi Public School',
   );
+  final TextEditingController _dateOfBirthController = TextEditingController(
+    text: '15/03/2006',
+  );
 
   @override
   void dispose() {
@@ -31,6 +34,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
     _emailController.dispose();
     _classController.dispose();
     _schoolController.dispose();
+    _dateOfBirthController.dispose();
     super.dispose();
   }
 
@@ -296,6 +300,13 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                           icon: Icons.location_on,
                           isEditing: _isEditing,
                         ),
+                        const SizedBox(height: 12),
+                        _ProfileField(
+                          label: 'Date of Birth',
+                          controller: _dateOfBirthController,
+                          icon: Icons.cake,
+                          isEditing: _isEditing,
+                        ),
                       ],
                     ),
                   ),
@@ -322,19 +333,27 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                         ),
                         const SizedBox(height: 16),
                         _AchievementItem(
-                          title: 'Physics Master',
-                          description: 'Completed all Physics chapters',
-                          icon: Icons.science,
-                          color: Colors.purple,
+                          title: 'Environmental Champion',
+                          description: 'Completed all Environment chapters',
+                          icon: Icons.eco,
+                          color: Colors.green,
                           date: '2 days ago',
                         ),
                         const SizedBox(height: 12),
                         _AchievementItem(
-                          title: 'Math Wizard',
-                          description: 'Solved 50+ math problems',
-                          icon: Icons.calculate,
+                          title: 'Pollution Expert',
+                          description: 'Mastered pollution and diseases topics',
+                          icon: Icons.water_drop,
                           color: Colors.blue,
                           date: '1 week ago',
+                        ),
+                        const SizedBox(height: 12),
+                        _AchievementItem(
+                          title: 'Energy Conservation',
+                          description: 'Completed energy consumption module',
+                          icon: Icons.battery_charging_full,
+                          color: Colors.orange,
+                          date: '3 days ago',
                         ),
                         const SizedBox(height: 12),
                         _AchievementItem(

@@ -321,15 +321,14 @@ class _ClassChaptersScreenState extends State<ClassChaptersScreen> {
                                       width: double.infinity,
                                       child: ElevatedButton.icon(
                                         onPressed: () {
-                                          ScaffoldMessenger.of(
+                                          Navigator.pushNamed(
                                             context,
-                                          ).showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Starting ${chapter['title']}...',
-                                              ),
-                                              backgroundColor: Colors.green,
-                                            ),
+                                            '/chapter-content',
+                                            arguments: {
+                                              'chapterTitle': chapter['title'],
+                                              'chapterNumber': '${index + 1}',
+                                              'topics': chapter['subtopics'],
+                                            },
                                           );
                                         },
                                         icon: const Icon(Icons.play_arrow),

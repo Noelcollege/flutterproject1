@@ -12,6 +12,7 @@ import 'screens/leaderboard_screen.dart';
 import 'screens/class_selection_screen.dart';
 import 'screens/student_profile_screen.dart';
 import 'screens/teacher_profile_screen.dart';
+import 'screens/chapter_content_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,6 +52,16 @@ class MyApp extends StatelessWidget {
             const StudentProfileScreen(),
         TeacherProfileScreen.routeName: (context) =>
             const TeacherProfileScreen(),
+        ChapterContentScreen.routeName: (context) {
+          final args =
+              ModalRoute.of(context)!.settings.arguments
+                  as Map<String, dynamic>;
+          return ChapterContentScreen(
+            chapterTitle: args['chapterTitle'],
+            chapterNumber: args['chapterNumber'],
+            topics: List<String>.from(args['topics']),
+          );
+        },
       },
     );
   }

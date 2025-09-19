@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/app_background.dart';
+import '../widgets/gradient_background.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -111,8 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: AppBackground(
-        imageAsset: 'assets/logo/app_icon.jpg',
+      body: GradientBackground(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -135,20 +134,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Row(
                               children: const [
-                                Icon(Icons.dashboard_customize_outlined),
+                                Icon(
+                                  Icons.dashboard_customize_outlined,
+                                  size: 28,
+                                ),
                                 SizedBox(width: 8),
                                 Text(
                                   'Student Dashboard',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 24,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 16),
                             SizedBox(
-                              height: 64,
+                              height: 80,
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -158,19 +160,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                       value: '12',
                                       icon: Icons.stacked_bar_chart,
                                     ),
-                                    SizedBox(width: 10),
+                                    SizedBox(width: 12),
                                     _CompactStatTile(
                                       title: 'XP',
                                       value: '8,420',
                                       icon: Icons.bolt_outlined,
                                     ),
-                                    SizedBox(width: 10),
+                                    SizedBox(width: 12),
                                     _CompactStatTile(
                                       title: 'Wins',
                                       value: '27',
                                       icon: Icons.emoji_events_outlined,
                                     ),
-                                    SizedBox(width: 10),
+                                    SizedBox(width: 12),
                                     _CompactStatTile(
                                       title: 'Streak',
                                       value: '5🔥',
@@ -181,17 +183,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 20),
                             Row(
                               children: [
-                                FilledButton(
-                                  onPressed: () {},
-                                  child: const Text('Start New Game'),
+                                Expanded(
+                                  child: FilledButton.icon(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/classes');
+                                    },
+                                    icon: const Icon(
+                                      Icons.play_arrow,
+                                      size: 20,
+                                    ),
+                                    label: const Text('Start Learning'),
+                                    style: FilledButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(width: 12),
-                                OutlinedButton(
-                                  onPressed: () {},
-                                  child: const Text('Continue'),
+                                Expanded(
+                                  child: OutlinedButton.icon(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/leaderboard',
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.leaderboard,
+                                      size: 20,
+                                    ),
+                                    label: const Text('Leaderboard'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -200,7 +231,58 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    // Leaderboard and Chapters moved to dedicated screens
+                    // Environment Studies Section
+                    const SizedBox(height: 16),
+                    Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.eco, color: Colors.green, size: 28),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Environment Studies',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            const Text(
+                              'Explore 17 comprehensive chapters covering environment, energy, safety, and more.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: FilledButton.icon(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/chapters');
+                                },
+                                icon: const Icon(Icons.menu_book, size: 20),
+                                label: const Text('View All Chapters'),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -228,28 +310,36 @@ class _CompactStatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade200),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: Colors.indigo),
-          const SizedBox(width: 8),
+          Icon(icon, size: 24, color: Colors.indigo),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 11, color: Colors.black54),
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
               ),
               Text(
                 value,
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),

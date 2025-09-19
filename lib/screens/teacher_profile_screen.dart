@@ -19,7 +19,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
     text: 'priya.sharma@school.edu',
   );
   final TextEditingController _subjectController = TextEditingController(
-    text: 'Physics & Mathematics',
+    text: 'Environmental Studies',
   );
   final TextEditingController _schoolController = TextEditingController(
     text: 'Delhi Public School',
@@ -28,7 +28,10 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
     text: '8 years',
   );
   final TextEditingController _qualificationController = TextEditingController(
-    text: 'M.Sc Physics, B.Ed',
+    text: 'M.Sc Environmental Science, B.Ed',
+  );
+  final TextEditingController _dateOfBirthController = TextEditingController(
+    text: '22/08/1985',
   );
 
   @override
@@ -39,6 +42,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
     _schoolController.dispose();
     _experienceController.dispose();
     _qualificationController.dispose();
+    _dateOfBirthController.dispose();
     super.dispose();
   }
 
@@ -318,6 +322,13 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                           icon: Icons.school,
                           isEditing: _isEditing,
                         ),
+                        const SizedBox(height: 12),
+                        _ProfileField(
+                          label: 'Date of Birth',
+                          controller: _dateOfBirthController,
+                          icon: Icons.cake,
+                          isEditing: _isEditing,
+                        ),
                       ],
                     ),
                   ),
@@ -344,32 +355,32 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         ),
                         const SizedBox(height: 16),
                         _ClassItem(
-                          className: 'Physics 12A',
-                          subject: 'Physics',
+                          className: 'Environmental Studies 11A',
+                          subject: 'Environmental Studies',
                           students: 42,
                           progress: 0.75,
-                          color: Colors.purple,
+                          color: Colors.green,
                         ),
                         const SizedBox(height: 12),
                         _ClassItem(
-                          className: 'Physics 12B',
-                          subject: 'Physics',
+                          className: 'Environmental Studies 11B',
+                          subject: 'Environmental Studies',
                           students: 38,
                           progress: 0.60,
-                          color: Colors.purple,
+                          color: Colors.green,
                         ),
                         const SizedBox(height: 12),
                         _ClassItem(
-                          className: 'Math 12A',
-                          subject: 'Mathematics',
+                          className: 'Environmental Studies 12A',
+                          subject: 'Environmental Studies',
                           students: 45,
                           progress: 0.85,
                           color: Colors.blue,
                         ),
                         const SizedBox(height: 12),
                         _ClassItem(
-                          className: 'Math 12B',
-                          subject: 'Mathematics',
+                          className: 'Environmental Studies 12B',
+                          subject: 'Environmental Studies',
                           students: 31,
                           progress: 0.70,
                           color: Colors.blue,
@@ -401,7 +412,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         const SizedBox(height: 16),
                         _ActivityItem(
                           title: 'Created New Quiz',
-                          description: 'Physics Chapter 5 - Thermodynamics',
+                          description: 'Environmental Pollution - Air Quality',
                           icon: Icons.quiz,
                           color: Colors.green,
                           time: '2 hours ago',
@@ -409,7 +420,8 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         const SizedBox(height: 12),
                         _ActivityItem(
                           title: 'Graded Assignments',
-                          description: '42 Physics assignments reviewed',
+                          description:
+                              '38 Environmental Studies assignments reviewed',
                           icon: Icons.assignment,
                           color: Colors.orange,
                           time: '4 hours ago',
@@ -417,7 +429,8 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         const SizedBox(height: 12),
                         _ActivityItem(
                           title: 'Student Progress Review',
-                          description: 'Monthly progress analysis completed',
+                          description:
+                              'Monthly environmental learning analysis completed',
                           icon: Icons.analytics,
                           color: Colors.blue,
                           time: '1 day ago',
@@ -448,21 +461,21 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         ),
                         const SizedBox(height: 16),
                         _GoalItem(
-                          title: 'Complete Physics Syllabus',
+                          title: 'Complete Environmental Studies Syllabus',
                           progress: 0.80,
-                          color: Colors.purple,
-                        ),
-                        const SizedBox(height: 12),
-                        _GoalItem(
-                          title: 'Improve Student Engagement',
-                          progress: 0.65,
                           color: Colors.green,
                         ),
                         const SizedBox(height: 12),
                         _GoalItem(
-                          title: 'Achieve 95% Pass Rate',
-                          progress: 0.90,
+                          title: 'Improve Environmental Awareness',
+                          progress: 0.75,
                           color: Colors.blue,
+                        ),
+                        const SizedBox(height: 12),
+                        _GoalItem(
+                          title: 'Achieve 95% Environmental Literacy',
+                          progress: 0.90,
+                          color: Colors.orange,
                         ),
                       ],
                     ),

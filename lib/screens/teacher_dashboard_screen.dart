@@ -185,7 +185,7 @@ class _TeacherDashboardScreenState extends State<TeacherDashboardScreen> {
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisSpacing: 16,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 1.5,
+                              childAspectRatio: 1.3,
                               children: [
                                 _QuickActionCard(
                                   icon: Icons.people_outline,
@@ -277,7 +277,7 @@ class _TeacherDashboardScreenState extends State<TeacherDashboardScreen> {
   }
 }
 
-class _QuickActionCard extends StatelessWidget {
+class _QuickActionCard extends StatefulWidget {
   final IconData icon;
   final String title;
   final String subtitle;
@@ -291,37 +291,99 @@ class _QuickActionCard extends StatelessWidget {
   });
 
   @override
+  State<_QuickActionCard> createState() => _QuickActionCardState();
+}
+
+class _QuickActionCardState extends State<_QuickActionCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 32, color: const Color(0xFF2753DB)),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          _isHovered = true;
+        });
+        _animationController.forward();
+      },
+      onExit: (_) {
+        setState(() {
+          _isHovered = false;
+        });
+        _animationController.reverse();
+      },
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Card(
+              elevation: _isHovered ? 8 : 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: InkWell(
+                onTap: widget.onTap,
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        widget.icon,
+                        size: _isHovered ? 36 : 32,
+                        color: _isHovered
+                            ? Colors.green
+                            : const Color(0xFF2753DB),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _isHovered ? Colors.green.shade700 : null,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.subtitle,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
-                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 4),
-              Text(
-                subtitle,
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

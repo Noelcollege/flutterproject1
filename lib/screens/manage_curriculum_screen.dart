@@ -87,7 +87,7 @@ class _ManageCurriculumScreenState extends State<ManageCurriculumScreen> {
       body: AppBackground(
         imageAsset: 'assets/logo/app_icon.jpg',
         child: SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
